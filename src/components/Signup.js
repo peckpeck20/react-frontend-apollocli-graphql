@@ -12,7 +12,6 @@ const CREATE_USER = gql`
   }
 `;
 
-
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -42,14 +41,19 @@ class Signup extends Component {
             placeholder="email"
           />
         </div>
-        <Mutation mutation={CREATE_USER} variables={{ name, email }}>
+        <Mutation mutation={CREATE_USER} variables={{ name, email }} onCompleted={(data) => console.log(data)}>
           {
-            (createUser) => (
-              <button onClick={createUser}>signup</button>
-            )
+            (createUser, { loading, error, data }) => {
+              if (error) return <p>error. try again</p>
+              if (loading) return <h1>Submitting... one sec :D</h1>
+
+              return (
+                <button onClick={createUser}>signup</button>
+              )
+
+            }
           }
         </Mutation>
-        {/* <button onClick={() => console.log('e')}>Submit</button> */}
       </div>
     );
   }

@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <Post post={[{ title: 'test', descripion: 'joe' }, { title: 'aaa', descripion: 'bb' }]} />
+          <Post />
           <Signup />
         </div>
 
