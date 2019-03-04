@@ -10,7 +10,9 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 
 //graphQL endpoint
 const httpLink = createHttpLink({
-  uri: 'http://localhost:5555'
+  uri: 'http://localhost:5555',
+  //needed for cookie access
+  credentials: 'include'
 })
 
 const client = new ApolloClient({

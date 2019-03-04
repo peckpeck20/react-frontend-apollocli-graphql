@@ -43,11 +43,15 @@ const Post = (props) => {
 
     <Query query={POSTS_QUERY}>
       {({ loading, error, data }) => {
-        console.log(data)
+        //console.log(data.posts)
         if (loading) return <h1>Loading..</h1>
         if (error) return <h1>error</h1>
+        if (!Array.isArray(data.posts) || !data.posts.length) {
+          // array does not exist, is not an array, or is empty
+          // ⇒ do not attempt to process array
+          return <h1>no posts</h1>
+        }
         return (
-
           data.posts.map((item, index) => {
             return (<div key={index}>
               <h1>{item.title}</h1>
