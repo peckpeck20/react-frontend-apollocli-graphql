@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
+import { CURRENT_USER_QUERY } from './User';
 
 const SIGNIN_USER = gql`
   mutation signin( $email: String!, $password: String!) {
@@ -36,14 +37,15 @@ class Signin extends Component {
       <Mutation
         mutation={SIGNIN_USER}
         variables={{ name, email, password }}
-        onCompleted={(data) => console.log(data)}
-        onError={(e) => { console.log(e) }}
+        // onCompleted={(data) => console.log(data)}
+        // onError={(e) => { console.log(e) }}
+        refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       >
         {
           (signin, { loading, error, data }) => {
             if (error) return <p>{error.toString()}</p>
             if (loading) return <h1>Submitting... one sec :D</h1>
-            if (data) return <p>sucess</p>
+            if (data) return <p>login success</p>
 
             return (
               <form

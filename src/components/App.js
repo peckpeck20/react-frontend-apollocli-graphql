@@ -4,6 +4,7 @@ import Post from './Post';
 import Signup from './Signup';
 import User from './User';
 import Signin from './Signin';
+import Signout from './Signout';
 
 class App extends Component {
   render() {
@@ -11,21 +12,24 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <User>
-            {/* from payload children prop, desctructure data then destructure 2nd level User object */}
-            {({ data: { user } }) => {
-              //console.log(user)
-              if (user) {
-                return <h1>signed in as {user.name} </h1>
+            {/* from payload children prop, desctructure data then destructure 2nd level checkUser object */}
+            {({ data: { checkUser } }) => {
+              //console.log(checkUser)
+              if (checkUser) {
+                return <>
+                  <h1>signed in as {checkUser.name} </h1>
+                  <Signout />
+                </>
               }
               else {
-                return null
+                return <Signin />
               }
             }}
           </User>
           <Post />
           <Signup />
 
-          <Signin />
+
         </div>
 
       </div>
